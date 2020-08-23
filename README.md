@@ -147,3 +147,13 @@ http://localhost:8080/product
 
 Pagination can also be done using the scrollId (as described in API 2 for Range Query too)
 
+
+# 3) Test Coverage Report 
+
+# We have 91.5% test coverage report in this project currently 
+
+![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/CoverageReport_MyToysGroup.PNG)
+
+
+To get the complete traversed detail on test coverage report, please clone this repository and check this html file : 
+https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/index.html (as it won't be visible in github UI)
