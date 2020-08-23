@@ -157,3 +157,27 @@ Pagination can also be done using the scrollId (as described in API 2 for Range 
 
 To get the complete traversed detail on test coverage report, please clone this repository and check this html file : 
 https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/index.html (as it won't be visible in github UI)
+
+# 4) Deployment 
+
+## Prerequisite 
+
+docker-compose should be installed in the linux environment : https://docs.docker.com/compose/install/
+
+This project is completely dockerized and will run in a single click : 
+
+**Step 1** : Clone this repository 
+
+**Step 2** : Change the IP Address (Optional - If needed) in the property file : MyToysGroup/mytoysgroup/property/microservice.properties
+
+![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/supporting_images/pic9.2.PNG)
+
+**Step 3** : Run this script to start the service : https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup/run.sh
+
+	**bash run.sh**
+	
+![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/supporting_images/pic10.PNG)
+
+# This will start the ElasticSearch and also the Spring Boot microservice
+
+![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/supporting_images/pic11.PNG)
