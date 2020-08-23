@@ -187,7 +187,7 @@ docker-compose should be installed in the linux environment : https://docs.docke
 
 **Step 3** : Run this script to start the service : https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup/run.sh
 
-	**bash run.sh**
+                          bash run.sh
 	
 ![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/supporting_images/pic10.PNG)
 
