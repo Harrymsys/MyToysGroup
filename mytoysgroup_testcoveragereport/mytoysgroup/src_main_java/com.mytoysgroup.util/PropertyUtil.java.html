@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PropertyUtil.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.util</a> &gt; <span class="el_source">PropertyUtil.java</span></div><h1>PropertyUtil.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.util;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+
+import com.toysgroup.exception.MyToysDefinedException;
+
+/**
+ * @author hariprasanth.l This class is used to load the property files.
+ */
+<span class="nc" id="L14">public class PropertyUtil {</span>
+
+	/**
+	 * Logger object
+	 */
+<span class="fc" id="L19">	private final static Logger LOG = Logger.getLogger(PropertyUtil.class);</span>
+
+	/**
+	 * MicroService property.
+	 */
+	private static Properties microservicePropertyFile;
+
+	/**
+	 * MicroService Property stream
+	 */
+<span class="fc" id="L29">	private static FileInputStream microservicePropertyStream = null;</span>
+
+	/**
+	 * Method to load the properties.
+	 * 
+	 * @throws MyToysDefinedException
+	 */
+	public static void loadProperties(String[] args) throws MyToysDefinedException {
+<span class="fc" id="L37">		loadMicroServiceProperties(processArgs(args));</span>
+<span class="fc" id="L38">	}</span>
+
+	/**
+	 * Method to get the micro service properties.
+	 */
+	public static String getProperty(String key) {
+<span class="fc" id="L44">		return microservicePropertyFile.getProperty(key);</span>
+	}
+
+	/**
+	 * Method to get the available property / default value.
+	 */
+	public static String getProperty(String key, String defaultValue) {
+<span class="fc" id="L51">		String propertyValue = getProperty(key);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">		if (!CommonUtils.isEmpty(propertyValue)) {</span>
+<span class="fc" id="L53">			return propertyValue;</span>
+		}
+<span class="nc" id="L55">		return defaultValue;</span>
+	}
+
+	/**
+	 * Method to load the microservice properties.
+	 * 
+	 * @param microservicePropertyFile holds the data of the mytoysgroup
+	 *                                 microservice property file.
+	 * @throws MyToysDefinedException
+	 */
+	private static void loadMicroServiceProperties(String microServicePropertyFile) throws MyToysDefinedException {
+		try {
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">			if (microservicePropertyFile == null) {</span>
+<span class="fc" id="L68">				LOG.info(&quot;Loading the property file : &quot; + microServicePropertyFile);</span>
+<span class="fc" id="L69">				microservicePropertyStream = new FileInputStream(microServicePropertyFile);</span>
+<span class="fc" id="L70">				microservicePropertyFile = new Properties();</span>
+<span class="fc" id="L71">				microservicePropertyFile.load(microservicePropertyStream);</span>
+<span class="fc" id="L72">				LOG.info(&quot;Loaded the property file successfuly : &quot; + microServicePropertyFile);</span>
+			}
+<span class="pc" id="L74">		} catch (Exception e) {</span>
+<span class="nc" id="L75">			LOG.error(e);</span>
+<span class="nc" id="L76">			throw new MyToysDefinedException(e);</span>
+		} finally {
+			try {
+<span class="fc" id="L79">				microservicePropertyStream.close();</span>
+<span class="pc" id="L80">			} catch (IOException e) {</span>
+<span class="nc" id="L81">				LOG.error(e);</span>
+			}
+		}
+<span class="fc" id="L84">	}</span>
+	
+	/**
+	 * Method to process the args
+	 */
+	private static String processArgs(String[] args) {
+<span class="fc" id="L90">		return args[1];</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ProductQueryBuilder.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.dao.elasticsearch</a> &gt; <span class="el_source">ProductQueryBuilder.java</span></div><h1>ProductQueryBuilder.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.dao.elasticsearch;
+
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+
+import com.mytoysgroup.beans.RangeRequest;
+import com.mytoysgroup.constants.ProductServiceConstant;
+import com.mytoysgroup.dao.elasticsearch.client.ElasticSearchConstants;
+import com.mytoysgroup.util.CommonUtils;
+
+/**
+ * This class is the helper class for the product dao.
+ * 
+ * @author hariprasanth.l
+ *
+ */
+<span class="fc" id="L17">public class ProductQueryBuilder {</span>
+
+	/**
+	 * Build the query for the products.
+	 */
+	public QueryBuilder searchQueryBuilder(final String search) {
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		if (!CommonUtils.isEmpty(search)) {</span>
+<span class="fc" id="L24">			String[] searchArray = search.split(ElasticSearchConstants.SPACE);</span>
+<span class="fc" id="L25">			QueryBuilder searchQueryBuilder = null;</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">			for (String searchText : searchArray) {</span>
+<span class="fc" id="L27">				String wildcardSearchText = frameWildCardQuery(searchText);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">				if (CommonUtils.isEmptyObject(searchQueryBuilder)) {</span>
+<span class="fc" id="L29">					searchQueryBuilder = getQueryBuilders(wildcardSearchText);</span>
+<span class="fc" id="L30">				} else {</span>
+<span class="fc" id="L31">					searchQueryBuilder = QueryBuilders.boolQuery().should(searchQueryBuilder)</span>
+<span class="fc" id="L32">							.should(getQueryBuilders(wildcardSearchText));</span>
+				}
+			}
+<span class="fc" id="L35">			return searchQueryBuilder;</span>
+		}
+<span class="fc" id="L37">		return QueryBuilders.matchAllQuery();</span>
+	}
+
+	/**
+	 * Method to frame the wildcard search query.
+	 */
+	private String frameWildCardQuery(String searchText) {
+<span class="fc" id="L44">		return ElasticSearchConstants.WILDCARD + searchText.toLowerCase() + ElasticSearchConstants.WILDCARD;</span>
+	}
+
+	/**
+	 * Frame query builders.
+	 */
+	private QueryBuilder getQueryBuilders(String searchText) {
+<span class="fc" id="L51">		return QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery(ProductServiceConstant.ID, searchText))</span>
+<span class="fc" id="L52">				.should(QueryBuilders.wildcardQuery(ProductServiceConstant.NAME, searchText))</span>
+<span class="fc" id="L53">				.should(QueryBuilders.wildcardQuery(ProductServiceConstant.STOCK, searchText))</span>
+<span class="fc" id="L54">				.should(QueryBuilders.wildcardQuery(ProductServiceConstant.BRAND, searchText));</span>
+	}
+
+	/**
+	 * Method to create the range query builder
+	 */
+	public QueryBuilder rangeQueryBuilder(RangeRequest rangeRequest) {
+<span class="fc" id="L61">		return QueryBuilders.rangeQuery(rangeRequest.getField()).gt(rangeRequest.getStartvalue()).lt(rangeRequest.getEndvalue());</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

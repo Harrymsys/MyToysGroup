@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CommonUtils.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.util</a> &gt; <span class="el_source">CommonUtils.java</span></div><h1>CommonUtils.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.util;
+
+/**
+ * @author hariprasanth.l Class to hold the common utils.
+ */
+<span class="nc" id="L6">public class CommonUtils {</span>
+
+	/**
+	 * Method to check the string is empty.
+	 * 
+	 * @param data holds the input for the check.
+	 * @return the boolean - isEmpty
+	 */
+	public final static boolean isEmpty(String data) {
+<span class="fc bfc" id="L15" title="All 4 branches covered.">		if (data != null &amp;&amp; data.trim().length() &gt; 0) {</span>
+<span class="fc" id="L16">			return false;</span>
+		}
+<span class="fc" id="L18">		return true;</span>
+	}
+	
+	/**
+	 * Method to check the Object is empty.
+	 * 
+	 * @param data holds the input for the check.
+	 * @return the boolean - isEmpty
+	 */
+	public final static boolean isEmptyObject(Object data) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">		if (data != null) {</span>
+<span class="fc" id="L29">			return false;</span>
+		}
+<span class="fc" id="L31">		return true;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

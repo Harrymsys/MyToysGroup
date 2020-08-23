@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ProductServiceConstant.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.constants</a> &gt; <span class="el_source">ProductServiceConstant.java</span></div><h1>ProductServiceConstant.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.constants;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This class is used to hold the constants for the complete product service.
+ * @author hariprasanth.l
+ *
+ */
+<span class="nc" id="L11">public class ProductServiceConstant {</span>
+
+	/**
+	 * HEADERS
+	 */
+<span class="fc" id="L16">	public final static String[] HEADERS = {&quot;ID&quot;, &quot;NAME&quot;, &quot;PRICE&quot;, &quot;OLD_PRICE&quot;, &quot;STOCK&quot;, &quot;BRAND&quot;};</span>
+
+	/**
+	 * UNIQUE_KEY
+	 */
+	public final static String UNIQUE_KEY = &quot;ID&quot;;
+	
+	/**
+	 * ID
+	 */
+	public final static String ID = &quot;ID&quot;;
+	
+	/**
+	 * KEYWORD
+	 */
+	public final static String KEYWORD = &quot;.keyword&quot;;
+	
+	/**
+	 * NAME
+	 */
+	public final static String NAME = &quot;NAME&quot;;
+	
+	/**
+	 * PRICE
+	 */
+	public final static String PRICE = &quot;PRICE&quot;;
+	
+	/**
+	 * OLD_PRICE
+	 */
+	public final static String OLD_PRICE = &quot;OLD_PRICE&quot;;
+	
+	/**
+	 * STOCK
+	 */
+	public final static String STOCK = &quot;STOCK&quot;;
+	
+	/**
+	 * BRAND
+	 */
+	public final static String BRAND = &quot;BRAND&quot;;
+	
+	/**
+	 * SORTMAP
+	 */
+<span class="fc" id="L61">	private final static Map&lt;String, String&gt; SORTMAP = new HashMap&lt;&gt;();</span>
+
+	/**
+	 * DEFAULT_RECORDS
+	 */
+<span class="fc" id="L66">	public static final String DEFAULT_RECORDS = &quot;20&quot;;</span>
+	
+	/**
+	 * Sort Mapping for query.
+	 * @return 
+	 */
+	public final static Map&lt;String, String&gt; getSortMap() {
+<span class="fc bfc" id="L73" title="All 2 branches covered.">		if(SORTMAP.isEmpty()) {</span>
+<span class="fc" id="L74">			SORTMAP.put(ID, ID+KEYWORD);</span>
+<span class="fc" id="L75">			SORTMAP.put(NAME, NAME+KEYWORD);</span>
+<span class="fc" id="L76">			SORTMAP.put(STOCK, STOCK+KEYWORD);</span>
+<span class="fc" id="L77">			SORTMAP.put(BRAND, BRAND+KEYWORD);</span>
+<span class="fc" id="L78">			SORTMAP.put(PRICE, PRICE);</span>
+<span class="fc" id="L79">			SORTMAP.put(OLD_PRICE, OLD_PRICE);</span>
+		}
+<span class="fc" id="L81">		return SORTMAP;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

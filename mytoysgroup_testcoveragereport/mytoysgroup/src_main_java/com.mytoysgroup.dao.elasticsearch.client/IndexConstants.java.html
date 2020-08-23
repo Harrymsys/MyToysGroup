@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>IndexConstants.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.dao.elasticsearch.client</a> &gt; <span class="el_source">IndexConstants.java</span></div><h1>IndexConstants.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.dao.elasticsearch.client;
+
+/**
+ * This class is used to hold the constants for the indexes in ElasticSearch.
+ * @author hariprasanth.l
+ *
+ */
+<span class="nc" id="L8">public class IndexConstants {</span>
+
+	/**
+	 * PRODUCTS
+	 */
+	public final static String PRODUCTS = &quot;products&quot;;
+
+	/**
+	 * PRODUCT_INDEX_MAPPING
+	 */
+	public final static String PRODUCT_INDEX_MAPPING = &quot; {\r\n&quot; + 
+			&quot;    \&quot;mappings\&quot;: {\r\n&quot; + 
+			&quot;      \&quot;mappings\&quot;: {\r\n&quot; + 
+			&quot;        \&quot;properties\&quot;: {\r\n&quot; + 
+			&quot;          \&quot;ID\&quot;: {\r\n&quot; + 
+			&quot;            \&quot;type\&quot;: \&quot;text\&quot;,\r\n&quot; + 
+			&quot;            \&quot;fields\&quot;: {\r\n&quot; + 
+			&quot;              \&quot;keyword\&quot;: {\r\n&quot; + 
+			&quot;                \&quot;type\&quot;: \&quot;keyword\&quot;,\r\n&quot; + 
+			&quot;                \&quot;ignore_above\&quot;: 256\r\n&quot; + 
+			&quot;              }\r\n&quot; + 
+			&quot;            }\r\n&quot; + 
+			&quot;          },\r\n&quot; + 
+			&quot;          \&quot;NAME\&quot;: {\r\n&quot; + 
+			&quot;            \&quot;type\&quot;: \&quot;text\&quot;,\r\n&quot; + 
+			&quot;            \&quot;fields\&quot;: {\r\n&quot; + 
+			&quot;              \&quot;keyword\&quot;: {\r\n&quot; + 
+			&quot;                \&quot;type\&quot;: \&quot;keyword\&quot;,\r\n&quot; + 
+			&quot;                \&quot;ignore_above\&quot;: 256\r\n&quot; + 
+			&quot;              }\r\n&quot; + 
+			&quot;            }\r\n&quot; + 
+			&quot;          },\r\n&quot; + 
+			&quot;          \&quot;BRAND\&quot;: {\r\n&quot; + 
+			&quot;            \&quot;type\&quot;: \&quot;text\&quot;,\r\n&quot; + 
+			&quot;            \&quot;fields\&quot;: {\r\n&quot; + 
+			&quot;              \&quot;keyword\&quot;: {\r\n&quot; + 
+			&quot;                \&quot;type\&quot;: \&quot;keyword\&quot;,\r\n&quot; + 
+			&quot;                \&quot;ignore_above\&quot;: 256\r\n&quot; + 
+			&quot;              }\r\n&quot; + 
+			&quot;            }\r\n&quot; + 
+			&quot;          },\r\n&quot; + 
+			&quot;          \&quot;STOCK\&quot;: {\r\n&quot; + 
+			&quot;            \&quot;type\&quot;: \&quot;text\&quot;,\r\n&quot; + 
+			&quot;            \&quot;fields\&quot;: {\r\n&quot; + 
+			&quot;              \&quot;keyword\&quot;: {\r\n&quot; + 
+			&quot;                \&quot;type\&quot;: \&quot;keyword\&quot;,\r\n&quot; + 
+			&quot;                \&quot;ignore_above\&quot;: 256\r\n&quot; + 
+			&quot;              }\r\n&quot; + 
+			&quot;            }\r\n&quot; + 
+			&quot;          },\r\n&quot; + 
+			&quot;          \&quot;PRICE\&quot;: {\r\n&quot; + 
+			&quot;            \&quot;type\&quot;: \&quot;double\&quot;\r\n&quot; + 
+			&quot;          },\r\n&quot; + 
+			&quot;          \&quot;OLD_PRICE\&quot;: {\r\n&quot; + 
+			&quot;            \&quot;type\&quot;: \&quot;double\&quot;\r\n&quot; + 
+			&quot;          }\r\n&quot; + 
+			&quot;        }\r\n&quot; + 
+			&quot;      }\r\n&quot; + 
+			&quot;    }\r\n&quot; + 
+			&quot;  }&quot;;
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

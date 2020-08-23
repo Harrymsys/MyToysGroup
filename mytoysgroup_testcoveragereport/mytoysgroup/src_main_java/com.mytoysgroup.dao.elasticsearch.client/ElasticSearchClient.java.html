@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ElasticSearchClient.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.dao.elasticsearch.client</a> &gt; <span class="el_source">ElasticSearchClient.java</span></div><h1>ElasticSearchClient.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.dao.elasticsearch.client;
+
+import java.net.InetAddress;
+
+import org.apache.log4j.Logger;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
+
+import com.mytoysgroup.util.CommonUtils;
+import com.toysgroup.exception.MyToysDefinedException;
+
+/**
+ * @author hariprasanth.l This class is used to create the instance for elastic
+ *         search eswrapper.
+ */
+@SuppressWarnings(&quot;deprecation&quot;)
+<span class="nc" id="L22">public class ElasticSearchClient {</span>
+
+	/**
+	 * Client used to communicate to the elastic search.
+	 */
+<span class="fc" id="L27">	private static Client client = null;</span>
+	/**
+	 * Initialization to the logger class.
+	 */
+<span class="fc" id="L31">	private static final Logger LOG = Logger.getLogger(ElasticSearchClient.class.getName());</span>
+
+	/**
+	 * Method creates the instance for the elastic search eswrapper.
+	 * 
+	 * @return the elastic search eswrapper.
+	 * @throws MyToysDefinedException holds the client connection exception.
+	 */
+	@SuppressWarnings({ &quot;resource&quot; })
+	public static Client getClient() throws MyToysDefinedException {
+		try {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">			if (client == null) {</span>
+<span class="fc" id="L43">				LOG.info(&quot;Creating the transport client connection...&quot;);</span>
+<span class="fc" id="L44">				Settings settings = Settings.builder()</span>
+<span class="fc" id="L45">						.put(ElasticSearchConstants.CLUSTER_KEY, ElasticSearchConstants.CLUSTER_NAME)</span>
+<span class="fc" id="L46">						.put(ElasticSearchConstants.XPACK, ElasticSearchConstants.USERNAME_PASSWORD)</span>
+<span class="fc" id="L47">						.put(ElasticSearchConstants.TRANSPORT_CONNECTION_TIMEOUT, ElasticSearchConstants.TIMEOUT_VALUE)</span>
+<span class="fc" id="L48">						.build();</span>
+<span class="fc" id="L49">				client = new PreBuiltXPackTransportClient(settings).addTransportAddress(</span>
+<span class="fc" id="L50">						new TransportAddress(InetAddress.getByName(ElasticSearchConstants.IPADDRESS),</span>
+<span class="fc" id="L51">								ElasticSearchConstants.TRANSPORT_PORT));</span>
+<span class="fc" id="L52">				LOG.info(&quot;Client connection created successfully...&quot;);</span>
+			}
+<span class="pc" id="L54">		} catch (Exception e) {</span>
+<span class="nc" id="L55">			throw new MyToysDefinedException(e);</span>
+		}
+<span class="fc" id="L57">		return client;</span>
+	}
+
+	/**
+	 * Method to create index
+	 */
+	public static void createIndex() throws MyToysDefinedException {
+		try {
+<span class="fc" id="L65">			LOG.info(&quot;Initiating the table / index creation process for the index named : &quot; + IndexConstants.PRODUCTS);</span>
+<span class="fc" id="L66">			CreateIndexRequest request = new CreateIndexRequest(IndexConstants.PRODUCTS);</span>
+<span class="fc" id="L67">			request.source(IndexConstants.PRODUCT_INDEX_MAPPING, XContentType.JSON);</span>
+<span class="nc" id="L68">			CreateIndexResponse createIndexResponse = client.admin().indices().create(request).get();</span>
+<span class="nc" id="L69">			LOG.info(String.format(&quot;Created the index successfully : %s and the Response from the data store success : %s&quot;,</span>
+<span class="nc" id="L70">					IndexConstants.PRODUCTS, createIndexResponse.isAcknowledged()));</span>
+<span class="pc" id="L71">		} catch (Exception e) {</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">			if (!CommonUtils.isEmptyObject(e)</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">					&amp;&amp; e.toString().contains(ElasticSearchConstants.RESOURCE_ALREADY_EXISTS)) {</span>
+<span class="fc" id="L74">				LOG.info(&quot;Table / Index already exists : &quot; + IndexConstants.PRODUCTS);</span>
+<span class="fc" id="L75">			} else {</span>
+<span class="nc" id="L76">				throw new MyToysDefinedException(e);</span>
+			}
+		}
+<span class="fc" id="L79">	}</span>
+
+	/**
+	 * Method to close the client connection.
+	 */
+	public static void close() {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">		if (client != null) {</span>
+<span class="fc" id="L86">			client.close();</span>
+		}
+<span class="fc" id="L88">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

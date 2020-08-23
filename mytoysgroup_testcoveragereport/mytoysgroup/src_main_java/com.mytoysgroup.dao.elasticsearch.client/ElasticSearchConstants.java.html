@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ElasticSearchConstants.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.dao.elasticsearch.client</a> &gt; <span class="el_source">ElasticSearchConstants.java</span></div><h1>ElasticSearchConstants.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.dao.elasticsearch.client;
+
+import com.mytoysgroup.util.PropertyUtil;
+
+/**
+ * @author hariprasanth.l This class is used to hold the elastic search
+ *         constants.
+ */
+<span class="nc" id="L9">public class ElasticSearchConstants {</span>
+
+	/**
+	 * CLUSTER_NAME_KEY
+	 */
+	public final static String CLUSTER_KEY = &quot;cluster.name&quot;;
+
+	/**
+	 * CLUSTER_NAME
+	 */
+	public final static String CLUSTER_NAME = &quot;docker-cluster&quot;;
+
+	/**
+	 * XPACK
+	 */
+	public static final String XPACK = &quot;xpack.security.user&quot;;
+
+	/**
+	 * DESTINATION_HOST_USERNAME
+	 */
+<span class="fc" id="L29">	public static final String SOURCE_HOST_USERNAME = PropertyUtil.getProperty(&quot;SOURCE_HOST_USERNAME&quot;, &quot;elastic&quot;);</span>
+	
+	/**
+	 * DESTINATION_HOST_PASSWORD
+	 */
+<span class="fc" id="L34">	public static final String SOURCE_HOST_PASSWORD = PropertyUtil.getProperty(&quot;SOURCE_HOST_PASSWORD&quot;, &quot;changeme&quot;);</span>
+	
+	/**
+	 * USERNAME
+	 */
+<span class="fc" id="L39">	public static final String USERNAME_PASSWORD = SOURCE_HOST_USERNAME</span>
+<span class="fc" id="L40">			+ &quot;:&quot; + SOURCE_HOST_PASSWORD;</span>
+
+	/**
+	 * TRANSPORT_PORT
+	 */
+<span class="fc" id="L45">	public static final int TRANSPORT_PORT = Integer</span>
+<span class="fc" id="L46">			.parseInt(PropertyUtil.getProperty(&quot;SOURCE_PORT&quot;, &quot;9300&quot;));</span>
+
+	/**
+	 * IPADDRESS
+	 */
+<span class="fc" id="L51">	public static final String IPADDRESS = PropertyUtil.getProperty(&quot;SOURCE_HOST&quot;, &quot;127.0.0.1&quot;);</span>
+	
+	/**
+	 * SOURCE_SCHEMA
+	 */
+<span class="fc" id="L56">	public static final String SOURCE_SCHEMA = PropertyUtil.getProperty(&quot;SOURCE_SCHEMA&quot;);</span>
+	
+	/**
+	 * Connection timeout value.
+	 */
+	public static final String TIMEOUT_VALUE = &quot;10s&quot;;
+	
+	/**
+	 * Connection timeout 
+	 */
+	public static final String TRANSPORT_CONNECTION_TIMEOUT = &quot;transport.connect_timeout&quot;;
+
+	/**
+	 * Timeout for reindex
+	 */
+	public static final long TIMEOUT = 5;
+	
+	/**
+	 * BATCH_SIZE
+	 */
+	public static final int BATCH_SIZE = 1000;
+
+	/**
+	 * SCROLL_STORAGE_TIME
+	 */
+	public static final long SCROLL_STORAGE_TIME = 120000;
+
+	/**
+	 * RESOURCE_ALREADY_EXISTS
+	 */
+	public static final String RESOURCE_ALREADY_EXISTS = &quot;ResourceAlreadyExistsException&quot;;
+
+	/**
+	 * WILDCARD
+	 */
+	public static final String WILDCARD = &quot;*&quot;;
+
+	/**
+	 * SPACE
+	 */
+<span class="fc" id="L96">	public static final String SPACE = &quot; &quot;;</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

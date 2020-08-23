@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CSVUtil.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.util</a> &gt; <span class="el_source">CSVUtil.java</span></div><h1>CSVUtil.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.util;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.mytoysgroup.constants.CommonConstants;
+import com.mytoysgroup.constants.ProductServiceConstant;
+import com.toysgroup.exception.MyToysDefinedException;
+
+/**
+ * This class is used to handle the CSV related functionalities.
+ * 
+ * @author hariprasanth.l
+ *
+ */
+<span class="nc" id="L24">public class CSVUtil {</span>
+
+	/**
+	 * This method is used to check the CSV file format.
+	 * 
+	 * @throws MyToysDefinedException - If the file type is not valid.
+	 */
+	public static boolean isValidFile(MultipartFile file) throws MyToysDefinedException {
+<span class="fc" id="L32">		String contentType = file.getContentType();</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">		for (String acceptedFileType : CommonConstants.ACCEPTED_FILE_TYPES) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">			if (contentType.contains(acceptedFileType)) {</span>
+<span class="fc" id="L35">				return true;</span>
+			}
+		}
+<span class="fc" id="L38">		throw new MyToysDefinedException(&quot;This file type is not accepted : &quot; + contentType);</span>
+	}
+
+	/**
+	 * This method is used to convert the file as stream to the object
+	 * 
+	 * @return the iterable object of CSV Record.
+	 * @throws MyToysDefinedException - If there is an exception in converting the
+	 *                                file as stream to the object.
+	 */
+	@SuppressWarnings(&quot;resource&quot;)
+	public static List&lt;CSVRecord&gt; convertFileToObject(MultipartFile file) throws MyToysDefinedException {
+		try {
+<span class="fc" id="L51">			BufferedReader fileReader = new BufferedReader(</span>
+<span class="fc" id="L52">					new InputStreamReader(file.getInputStream(), CommonConstants.ENCODING_FORMAT));</span>
+<span class="fc" id="L53">			return new CSVParser(fileReader,</span>
+<span class="fc" id="L54">					CSVFormat.DEFAULT.withHeader(ProductServiceConstant.HEADERS).withIgnoreHeaderCase().withTrim())</span>
+<span class="fc" id="L55">							.getRecords();</span>
+<span class="nc" id="L56">		} catch (Exception e) {</span>
+<span class="nc" id="L57">			throw new MyToysDefinedException(e);</span>
+		}
+	}
+
+	/**
+	 * Method to convert the csv record to hashmap.
+	 */
+	public static Map&lt;String, Object&gt; csvRecordToMap(CSVRecord csvRecord, String[] headers) {
+<span class="fc" id="L65">		Map&lt;String, Object&gt; dataMap = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		for (int index = 0; index &lt; headers.length; index++) {</span>
+<span class="fc" id="L67">			String header = headers[index];</span>
+<span class="fc" id="L68">			String value = csvRecord.get(index);</span>
+<span class="fc" id="L69">			dataMap.put(header, value);</span>
+		}
+<span class="fc" id="L71">		return dataMap;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

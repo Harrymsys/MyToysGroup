@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TestConstants.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.constants</a> &gt; <span class="el_source">TestConstants.java</span></div><h1>TestConstants.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.constants;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Map;
+
+import com.mytoysgroup.beans.ProductResponse;
+import com.mytoysgroup.beans.RangeRequest;
+
+/**
+ * This class is used to store the test constants.
+ * 
+ * @author hariprasanth.l
+ *
+ */
+<span class="nc" id="L16">public class TestConstants {</span>
+
+	/**
+	 * MICROSERVICE_TEST_PROPERTY
+	 */
+<span class="fc" id="L21">	public final static String[] MICROSERVICE_TEST_PROPERTY = { &quot;&quot;,</span>
+<span class="fc" id="L22">			&quot;D:\\base\\Workspace\\eclipse_back\\mytoys_group\\mytoys_group_project\\mytoysgroup\\src\\test\\java\\com\\mytoysgroup\\rest\\microservicetest.properties&quot; };</span>
+
+	/**
+	 * PRODUCT_BASE_URL
+	 */
+	public final static String PRODUCT_BASE_URL = &quot;/product&quot;;
+
+	/**
+	 * PRODUCT_BASE_URL_WITH_SIZE
+	 */
+	public final static String PRODUCT_BASE_URL_WITH_SIZE = &quot;/product?size=20&quot;;
+
+	/**
+	 * SIZE_WITH_SEARCH
+	 */
+	public final static String SIZE_WITH_SEARCH = &quot;/product?size=20&amp;search=JOY TOY&quot;;
+
+	/**
+	 * SIZE_SEARCH_SORTBYNAME
+	 */
+	public final static String SIZE_SEARCH_SORTBYNAME = &quot;/product?size=20&amp;search=A&amp;sort=NAME&quot;;
+
+	/**
+	 * WRONG_SORT_NAME
+	 */
+	public final static String WRONG_SORT_NAME = &quot;/product?sort=TEST&quot;;
+
+	/**
+	 * TOTAL_IN_CURRENT_SEARCH
+	 */
+	public final static String TOTAL_IN_CURRENT_SEARCH = &quot;totalRecordInCurrentSearch&quot;;
+
+	/**
+	 * PRODUCT_BASE_URL_WITH_PAGINATION
+	 */
+	public final static String PRODUCT_BASE_URL_WITH_PAGINATION = &quot;/product?scrollId=&quot;;
+	
+
+	/**
+	 * SEARCH_WITH_SCROLL
+	 */
+	public static final String SEARCH_WITH_SCROLL = &quot;/product?scrollId=data&amp;search=data&quot;;
+
+	/**
+	 * Range Query
+	 */
+	public static final String RANGE_QUERY = &quot;{\r\n&quot; + &quot;	\&quot;field\&quot; : \&quot;PRICE\&quot;,\r\n&quot; + &quot;	\&quot;startvalue\&quot; : 10,\r\n&quot;
+			+ &quot;	\&quot;endvalue\&quot; : 20\r\n&quot; + &quot;}&quot;;
+
+	/**
+	 * Frame range query with scrollId.
+	 */
+	public static final String getRangeQueryWithScrollId(String scrollId) {
+<span class="fc" id="L75">		String rangeQuery = &quot;{\&quot;scrollId\&quot;:\&quot;&quot; + scrollId + &quot;\&quot;}&quot;;</span>
+<span class="fc" id="L76">		return rangeQuery;</span>
+	}
+
+	/**
+	 * Range Query
+	 */
+	public static final String WRONG_RANGE_QUERY = &quot;{\r\n&quot; + &quot;	\&quot;field\&quot; : \&quot;TEST\&quot;,\r\n&quot;
+			+ &quot;	\&quot;startvalue\&quot; : 10,\r\n&quot; + &quot;	\&quot;endvalue\&quot; : 20\r\n&quot; + &quot;}&quot;;
+
+	/**
+	 * SCROLLID
+	 */
+	public static final String SCROLLID = &quot;scrollId&quot;;
+
+	/**
+	 * UPLOAD_FILE_NAME
+	 */
+	public static final String UPLOAD_FILE_NAME = &quot;productcsv&quot;;
+
+	/**
+	 * PRODUCTCSV
+	 */
+	public static final String PRODUCTCSV = &quot;ID,NAME,PRICE,OLD_PRICE,STOCK,BRAND\r\n&quot;
+			+ &quot;43664,LEGO #14362905,24.99,29.99,0,LEGO\r\n&quot; + &quot;18450,s.Oliver #1574690,35.99,35.99,12,s.Oliver\r\n&quot;
+			+ &quot;15348,ESPRIT #796418,48.99,69.99,0,ESPRIT\r\n&quot; + &quot;16113,Friboo #62442,29.99,34.99,0,Friboo\r\n&quot;
+			+ &quot;9893,NIKE #1283807,24.99,24.99,6,NIKE\r\n&quot; + &quot;14541,s.Oliver #2119423,25.99,25.99,3,s.Oliver\r\n&quot;
+			+ &quot;22704,s.Oliver #3253651,29.99,29.99,5,s.Oliver\r\n&quot; + &quot;19302,Sony #1798446,69.99,69.99,0,Sony\r\n&quot;
+			+ &quot;42878,LEGO #9929190,30.99,39.95,0,LEGO\r\n&quot; + &quot;40755,s.Oliver #7538143,8.99,8.99,8,s.Oliver\r\n&quot;
+			+ &quot;4361,LEGO #168389,29.99,29.99,0,LEGO\r\n&quot; + &quot;467,s.Oliver #5687,22.99,22.99,0,s.Oliver\r\n&quot;
+			+ &quot;10920,s.Oliver #744328,23.99,23.99,0,s.Oliver\r\n&quot; + &quot;9848,VANS #912582,74.95,74.95,5,VANS\r\n&quot;
+			+ &quot;35022,SIKU #6797897,36.99,39.99,68,SIKU\r\n&quot; + &quot;16520,LEGO #1086696,33.99,36.99,340,LEGO\r\n&quot;
+			+ &quot;24525,LEGO #8545040,59.99,69.99,2,LEGO\r\n&quot; + &quot;2044,LEGO #269858,26.99,29.99,95,LEGO\r\n&quot;
+			+ &quot;28348,PLAYMOBIL #6962213,16.99,17.99,86,PLAYMOBIL\r\n&quot; + &quot;44074,LEGO #3138861,29.99,29.99,0,LEGO\r\n&quot;
+			+ &quot;37596,LEGO #11751436,29.99,29.99,0,LEGO\r\n&quot; + &quot;314,PLAYMOBIL #86252,18.99,19.99,94,PLAYMOBIL\r\n&quot;
+			+ &quot;30821,JOY TOY #5656921,7.99,7.99,183,JOY TOY\r\n&quot; + &quot;18171,SIKU #4143756,18.99,19.99,43,SIKU\r\n&quot;
+			+ &quot;48738,UNDERCOVER #2462931,4.99,7.99,37,UNDERCOVER\r\n&quot;
+			+ &quot;28398,PLAYMOBIL #4161522,18.99,23.99,34,PLAYMOBIL\r\n&quot;
+			+ &quot;34074,PLAYMOBIL #6358024,41.99,59.99,361,PLAYMOBIL\r\n&quot;
+			+ &quot;15436,LEGO #1196398,221.99,299.99,177,LEGO\r\n&quot;
+			+ &quot;43787,PLAYMOBIL #5860360,63.99,82.99,500,PLAYMOBIL\r\n&quot;
+			+ &quot;312,PLAYMOBIL #20059,4.29,3.99,184,PLAYMOBIL\r\n&quot;
+			+ &quot;45802,PLAYMOBIL #12865528,23.99,29.99,328,PLAYMOBIL\r\n&quot;
+			+ &quot;13726,PLAYMOBIL #700159,27.99,34.99,30,PLAYMOBIL\r\n&quot; + &quot;32269,LEGO #10847620,34.99,49.99,281,LEGO\r\n&quot;
+			+ &quot;19132,PLAYMOBIL #4073444,8.49,9.99,75,PLAYMOBIL\r\n&quot;
+			+ &quot;1968,PLAYMOBIL #56567,76.99,104.99,131,PLAYMOBIL\r\n&quot;
+			+ &quot;47433,PLAYMOBIL #14841456,14.99,16.99,236,PLAYMOBIL\r\n&quot;
+			+ &quot;47271,PLAYMOBIL #3755351,28.99,37.99,114,PLAYMOBIL\r\n&quot;
+			+ &quot;13395,PLAYMOBIL #2781318,25.99,33.99,150,PLAYMOBIL\r\n&quot;
+			+ &quot;28105,PLAYMOBIL #2361956,7.49,7.99,71,PLAYMOBIL\r\n&quot; + &quot;20347,LEGO #6429784,9.49,9.99,261,LEGO\r\n&quot;
+			+ &quot;30185,SIKU #8498723,33.99,39.99,30,SIKU\r\n&quot; + &quot;41078,PLAYMOBIL #9528919,43.99,56.99,394,PLAYMOBIL\r\n&quot;
+			+ &quot;31255,PLAYMOBIL #10892898,83.99,114.99,123,PLAYMOBIL\r\n&quot;
+			+ &quot;49135,PLAYMOBIL #1628099,8.49,9.99,136,PLAYMOBIL\r\n&quot; + &quot;44262,LEGO #10858542,18.99,19.99,377,LEGO\r\n&quot;
+			+ &quot;830,PLAYMOBIL #30044,17.99,19.99,64,PLAYMOBIL\r\n&quot; + &quot;48455,JOY TOY #5286205,8.49,4.99,3,JOY TOY\r\n&quot;
+			+ &quot;36044,LEGO #5938952,14.99,14.99,1097,LEGO\r\n&quot; + &quot;32521,LEGO #8940928,14.99,14.99,229,LEGO\r\n&quot;
+			+ &quot;25289,Universal #1823891,9.99,9.99,0,Universal\r\n&quot;
+			+ &quot;33065,PLAYMOBIL #5503230,17.99,19.99,22,PLAYMOBIL\r\n&quot; + &quot;13497,LEGO #2156688,53.99,59.99,123,LEGO\r\n&quot;
+			+ &quot;14492,LEGO #1066907,90.99,99.99,210,LEGO\r\n&quot; + &quot;1397,PLAYMOBIL #337649,9.49,9.99,113,PLAYMOBIL\r\n&quot;
+			+ &quot;30604,PLAYMOBIL #4973903,11.99,13.99,199,PLAYMOBIL\r\n&quot;
+			+ &quot;49101,PLAYMOBIL #2155560,57.99,77.99,198,PLAYMOBIL\r\n&quot;
+			+ &quot;42422,PLAYMOBIL #698556,11.99,13.99,52,PLAYMOBIL\r\n&quot; + &quot;11919,SIKU #2148864,19.99,22.99,5,SIKU\r\n&quot;
+			+ &quot;12114,SIKU #833906,19.99,19.99,143,SIKU\r\n&quot; + &quot;41916,LEGO #13760358,87.99,119.99,286,LEGO\r\n&quot;
+			+ &quot;44751,PLAYMOBIL #14639658,25.99,34.99,129,PLAYMOBIL\r\n&quot;
+			+ &quot;35192,UNDERCOVER #1812325,15.99,19.99,107,UNDERCOVER\r\n&quot;
+			+ &quot;29674,PLAYMOBIL #2166675,60.99,72.99,29,PLAYMOBIL\r\n&quot;
+			+ &quot;42418,PLAYMOBIL #2543072,35.99,47.99,136,PLAYMOBIL\r\n&quot; + &quot;10617,LEGO #3572427,88.99,89.99,10,LEGO\r\n&quot;
+			+ &quot;4347,SIKU #818043,306.99,339.0,6,SIKU\r\n&quot; + &quot;18514,PLAYMOBIL #5190980,6.49,8.49,130,PLAYMOBIL\r\n&quot;
+			+ &quot;15320,SIKU #4695620,20.99,22.99,35,SIKU\r\n&quot; + &quot;30803,UNDERCOVER #7301690,9.49,9.99,32,UNDERCOVER\r\n&quot;
+			+ &quot;37635,JOY TOY #3009101,11.99,12.99,49,JOY TOY\r\n&quot; + &quot;42964,JOY TOY #3279311,4.79,7.99,17,JOY TOY\r\n&quot;
+			+ &quot;5461,LEGO #1895535,39.99,49.99,43,LEGO\r\n&quot; + &quot;24701,JOY TOY #7452765,11.99,16.99,4,JOY TOY\r\n&quot;
+			+ &quot;13637,UNDERCOVER #3898797,6.49,9.99,57,UNDERCOVER\r\n&quot;
+			+ &quot;9706,PLAYMOBIL #537028,18.99,19.99,58,PLAYMOBIL\r\n&quot; + &quot;9485,SIKU #1800538,24.99,27.99,26,SIKU\r\n&quot;
+			+ &quot;1048,LEGO #217157,29.99,29.99,0,LEGO\r\n&quot; + &quot;49715,s.Oliver #2513935,25.99,29.99,5,s.Oliver\r\n&quot;
+			+ &quot;10416,EB KIDS #1930809,31.99,39.99,0,EB KIDS\r\n&quot; + &quot;30883,LEGO #4798152,16.99,16.99,0,LEGO\r\n&quot;
+			+ &quot;48023,s.Oliver #1716176,25.99,25.99,0,s.Oliver\r\n&quot;
+			+ &quot;29760,s.Oliver #9430226,49.99,49.99,2,s.Oliver\r\n&quot; + &quot;1909,ESPRIT #430635,22.99,29.99,4,ESPRIT\r\n&quot;
+			+ &quot;16437,s.Oliver #873028,48.95,69.95,4,s.Oliver\r\n&quot; + &quot;8891,s.Oliver #1359471,13.99,13.99,0,s.Oliver\r\n&quot;
+			+ &quot;15883,s.Oliver #5056602,19.99,19.99,1,s.Oliver\r\n&quot;
+			+ &quot;44611,s.Oliver #11189509,17.99,17.99,4,s.Oliver\r\n&quot;
+			+ &quot;12900,s.Oliver #1573233,13.99,13.99,0,s.Oliver\r\n&quot; + &quot;7999,ESPRIT #1391009,35.0,49.95,0,ESPRIT\r\n&quot;
+			+ &quot;34066,LEGO #5624811,9.99,9.99,0,LEGO\r\n&quot; + &quot;32877,LEGO #3713508,29.99,29.99,0,LEGO\r\n&quot;
+			+ &quot;36447,LEGO #9390396,16.99,16.99,0,LEGO\r\n&quot; + &quot;10764,s.Oliver #668722,19.99,19.99,1,s.Oliver\r\n&quot;
+			+ &quot;37004,NIKE #9759569,33.0,33.0,5,NIKE\r\n&quot; + &quot;24960,NIKE #6371917,25.0,25.0,9,NIKE\r\n&quot;
+			+ &quot;2289,s.Oliver #102352,25.99,25.99,8,s.Oliver\r\n&quot; + &quot;45280,s.Oliver #12981015,15.99,15.99,0,s.Oliver\r\n&quot;
+			+ &quot;20046,LEGO #4896500,9.99,9.99,0,LEGO\r\n&quot; + &quot;9180,LEGO #2265408,9.99,9.99,0,LEGO\r\n&quot;
+			+ &quot;34034,s.Oliver #9595654,36.99,39.99,11,s.Oliver\r\n&quot;
+			+ &quot;27219,s.Oliver #421816,10.99,11.99,0,s.Oliver\r\n&quot; + &quot;1394,s.Oliver #103894,11.99,11.99,0,s.Oliver\r\n&quot;
+			+ &quot;48619,s.Oliver #15869774,17.99,17.99,0,s.Oliver\r\n&quot;
+			+ &quot;1552,TOMMY HILFIGER #208032,27.99,27.99,19,TOMMY HILFIGER\r\n&quot;
+			+ &quot;30718,s.Oliver #8948362,29.99,29.99,0,s.Oliver\r\n&quot; + &quot;20940,NIKE #801238,39.99,39.99,1,NIKE\r\n&quot;
+			+ &quot;24974,PLAYMOBIL #4830667,44.99,59.99,0,PLAYMOBIL\r\n&quot;
+			+ &quot;10475,TOMMY HILFIGER #803396,15.99,49.99,0,TOMMY HILFIGER\r\n&quot;
+			+ &quot;25872,s.Oliver #8176000,29.99,29.99,0,s.Oliver\r\n&quot;
+			+ &quot;47260,s.Oliver #14308414,39.99,39.99,1,s.Oliver\r\n&quot; + &quot;14225,ESPRIT #4499729,29.99,29.99,5,ESPRIT\r\n&quot;
+			+ &quot;6637,Friboo #740609,34.99,34.99,0,Friboo\r\n&quot; + &quot;41471,LEGO #12717505,12.99,14.99,144,LEGO\r\n&quot;
+			+ &quot;44686,LEGO #8352461,24.99,32.99,788,LEGO\r\n&quot; + &quot;42142,LEGO #14155874,32.99,39.99,260,LEGO\r\n&quot;
+			+ &quot;13197,LEGO #3262515,32.99,39.99,204,LEGO\r\n&quot; + &quot;18542,LEGO #1699204,17.99,19.99,328,LEGO\r\n&quot;
+			+ &quot;10830,LEGO #2183969,30.99,32.99,45,LEGO\r\n&quot; + &quot;36095,PLAYMOBIL #2128686,9.99,9.99,71,PLAYMOBIL\r\n&quot;
+			+ &quot;22737,LEGO #3219424,17.99,19.99,314,LEGO\r\n&quot; + &quot;24103,LEGO #737391,16.99,19.99,301,LEGO\r\n&quot;
+			+ &quot;48891,LEGO #9851310,18.99,19.99,2841,LEGO\r\n&quot; + &quot;23084,LEGO #6375429,23.99,29.99,844,LEGO\r\n&quot;
+			+ &quot;5464,LEGO #814752,35.99,39.99,89,LEGO\r\n&quot; + &quot;27770,LEGO #6789119,14.99,14.99,222,LEGO\r\n&quot;
+			+ &quot;23302,LEGO #6335150,23.99,29.99,576,LEGO\r\n&quot; + &quot;18149,LEGO #3226541,45.99,49.99,628,LEGO\r\n&quot;
+			+ &quot;10649,LEGO #1611515,9.99,9.99,99,LEGO\r\n&quot; + &quot;39915,LEGO #13422305,9.99,9.99,324,LEGO\r\n&quot;
+			+ &quot;36004,LEGO #11249816,25.99,29.99,481,LEGO\r\n&quot; + &quot;686,PLAYMOBIL #136969,23.99,29.99,325,PLAYMOBIL\r\n&quot;
+			+ &quot;13966,PLAYMOBIL #3182811,18.99,19.99,232,PLAYMOBIL\r\n&quot; + &quot;11169,LEGO #2403428,35.99,49.99,190,LEGO\r\n&quot;
+			+ &quot;15868,LEGO #5236899,25.99,29.99,165,LEGO\r\n&quot; + &quot;30917,LEGO #6776161,18.99,19.99,307,LEGO\r\n&quot;
+			+ &quot;893,LEGO #227603,44.99,59.99,93,LEGO\r\n&quot; + &quot;49470,LEGO #17301292,23.99,29.99,316,LEGO\r\n&quot;
+			+ &quot;3314,UNDERCOVER #1026005,9.99,9.99,18,UNDERCOVER\r\n&quot; + &quot;32042,LEGO #1935889,14.99,14.99,648,LEGO\r\n&quot;
+			+ &quot;15794,LEGO #4561840,6.99,4.99,490,LEGO\r\n&quot; + &quot;33952,UNDERCOVER #3337812,9.99,9.99,7,UNDERCOVER\r\n&quot;
+			+ &quot;12903,UNDERCOVER #4255599,9.99,9.99,21,UNDERCOVER\r\n&quot; + &quot;7300,LEGO #2325904,17.99,19.99,344,LEGO\r\n&quot;
+			+ &quot;20955,LEGO #5103994,20.99,24.99,176,LEGO\r\n&quot; + &quot;10485,LEGO #1338034,73.99,99.99,132,LEGO&quot;;
+
+	/**
+	 * CSV_WITHOUT_DATA
+	 */
+	public static final String CSV_WITHOUT_DATA = &quot;ID,NAME,PRICE,OLD_PRICE,STOCK,BRAND&quot;;
+	
+	/**
+	 * CSV_WITH_UNEXPECTED_HEADER
+	 */
+	public static final String CSV_WITH_UNEXPECTED_HEADER = &quot;ID,WRONG_NAME,PRICE,OLD_PRICE,STOCK,BRAND\r\n&quot; + 
+			&quot;43664,LEGO #14362905,24.99,29.99,0,LEGO&quot;;
+	
+	/**
+	 * MEDIA_TYPE
+	 */
+	public static final String MEDIA_TYPE = &quot;text/csv&quot;;
+	
+	/**
+	 * MEDIA_TYPE
+	 */
+	public static final String WRONG_MEDIA_TYPE = &quot;test&quot;;
+
+	/**
+	 * PRODUCT_UPLOAD_URL
+	 */
+	public static final String PRODUCT_UPLOAD_URL = &quot;/product/upload&quot;;
+
+	/**
+	 * UPLOAD_RESPONSE
+	 */
+<span class="fc" id="L216">	public static final String UPLOAD_RESPONSE = &quot;All the 146 records in the file : productcsv are updated successfully to the datastore.&quot;;</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>

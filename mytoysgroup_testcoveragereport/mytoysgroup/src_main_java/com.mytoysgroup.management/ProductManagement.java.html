@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ProductManagement.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ProductServiceIT (23 Aug, 2020 11:36:02 AM)</a> &gt; <a href="../../index.html" class="el_group">mytoysgroup</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.mytoysgroup.management</a> &gt; <span class="el_source">ProductManagement.java</span></div><h1>ProductManagement.java</h1><pre class="source lang-java linenums">package com.mytoysgroup.management;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.csv.CSVRecord;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.mytoysgroup.beans.ProductResponse;
+import com.mytoysgroup.beans.RangeRequest;
+import com.mytoysgroup.constants.CommonConstants;
+import com.mytoysgroup.constants.ProductServiceConstant;
+import com.mytoysgroup.dao.elasticsearch.ProductDao;
+import com.mytoysgroup.productinterface.IProductDao;
+import com.mytoysgroup.util.CSVUtil;
+import com.mytoysgroup.util.CommonUtils;
+import com.toysgroup.exception.MyToysDefinedException;
+
+/**
+ * This class contains the business logic for the product module.
+ * 
+ * @author hariprasanth.l
+ *
+ */
+@Component(&quot;productManagement&quot;)
+<span class="fc" id="L28">public class ProductManagement {</span>
+
+	/**
+	 * Logger object
+	 */
+<span class="fc" id="L33">	private final static Logger LOG = Logger.getLogger(ProductManagement.class);</span>
+
+	/**
+	 * Loading the csv content to data store.
+	 * 
+	 * @throws MyToysDefinedException - If the file type is not valid - If the file
+	 *                                content is not valid - If the file is not able
+	 *                                to successfully added to the data store. - If
+	 *                                there is no CSV record. - If there is an
+	 *                                exception in the datastore write operation.
+	 */
+	public int loadCSVtoDataStore(MultipartFile productcsv) throws MyToysDefinedException {
+<span class="fc" id="L45">		String fileName = productcsv.getOriginalFilename();</span>
+		// 1. Validation
+<span class="fc" id="L47">		LOG.info(&quot;Validating the file : &quot; + fileName);</span>
+<span class="fc" id="L48">		CSVUtil.isValidFile(productcsv);</span>
+
+		// 2. Validate Content
+<span class="fc" id="L51">		LOG.info(&quot;Validating the content in the file : &quot; + fileName);</span>
+<span class="fc" id="L52">		List&lt;CSVRecord&gt; productRecords = CSVUtil.convertFileToObject(productcsv);</span>
+<span class="fc" id="L53">		validateContent(productRecords);</span>
+
+		// 3. Loading the data to data store
+<span class="fc" id="L56">		LOG.info(&quot;Loading the data from the file : &quot; + fileName + &quot; into the datastore...&quot;);</span>
+<span class="fc" id="L57">		IProductDao productDao = new ProductDao();</span>
+<span class="fc" id="L58">		productDao.bulkCreate(productRecords, ProductServiceConstant.HEADERS, ProductServiceConstant.UNIQUE_KEY);</span>
+
+		// 4. Framing the response
+<span class="fc" id="L61">		int totalRecords = productRecords.size();</span>
+<span class="fc" id="L62">		LOG.info(String.format(&quot;All the %s records in the file : %s are updated successfully to the datastore.&quot;,</span>
+<span class="fc" id="L63">				totalRecords, fileName));</span>
+<span class="fc" id="L64">		return totalRecords;</span>
+	}
+
+	/**
+	 * Method to validate the content.
+	 * 
+	 * @param csvRecords holds the rows as interable content.
+	 * @throws MyToysDefinedException - validating is data available - validating
+	 *                                the content
+	 */
+	private void validateContent(List&lt;CSVRecord&gt; productRecords) throws MyToysDefinedException {
+		try {
+<span class="fc bfc" id="L76" title="All 2 branches covered.">			if (productRecords.size() &lt;= 1) {</span>
+<span class="fc" id="L77">				throw new MyToysDefinedException(&quot;There is no record found in the uploaded CSV file!&quot;);</span>
+			}
+<span class="fc" id="L79">			CSVRecord headerRecord = productRecords.get(CommonConstants.HEADER_INDEX);</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">			for (int index = 0; index &lt; ProductServiceConstant.HEADERS.length; index++) {</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">				if (!ProductServiceConstant.HEADERS[index].equalsIgnoreCase(headerRecord.get(index))) {</span>
+<span class="fc" id="L82">					throw new MyToysDefinedException(&quot;There are missing headers in the uploaded CSV file !&quot;);</span>
+				}
+			}
+<span class="fc" id="L85">		} catch (Exception e) {</span>
+<span class="fc" id="L86">			throw new MyToysDefinedException(e);</span>
+		}
+<span class="fc" id="L88">	}</span>
+
+	/**
+	 * This service is used to get all the products based on the following criteria
+	 * 		- Search Keyword on the field like ID, NAME, BRAND, STOCK
+	 * 		- Sort on all the fields 
+	 * 		- Limit by Size
+	 * 		- Pagination
+	 * 
+	 * @return all the products available based on the above matching criteria.
+	 *
+	 * @throws MyToysDefinedException - If the client is not available / not able to
+	 *                                connect. - If there is an exception in the
+	 *                                datastore layer
+	 */
+	public ProductResponse getProducts(String search, int size, String sort, String scrollId) throws MyToysDefinedException {
+		try {
+<span class="fc" id="L105">			validateSearchInput(scrollId, search, size, sort);</span>
+<span class="fc" id="L106">			LOG.info(logMessage(scrollId, search, size));</span>
+<span class="fc" id="L107">			IProductDao productDao = new ProductDao();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">			if(!CommonUtils.isEmpty(scrollId)) {</span>
+<span class="fc" id="L109">				return productDao.getProducts(scrollId);</span>
+			} else {
+<span class="fc" id="L111">				return productDao.getProducts(search, size, sort);</span>
+			}
+<span class="fc" id="L113">		} catch (MyToysDefinedException e) {</span>
+<span class="fc" id="L114">			throw new MyToysDefinedException(e);</span>
+		}
+	}
+
+	/**
+	 * Method to frame the input message.
+	 */
+	private String logMessage(String scrollId, String search, int size) {
+<span class="fc" id="L122">		String message = &quot;Get the products from the datastore &quot;;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">		if(!CommonUtils.isEmpty(scrollId)) {</span>
+<span class="fc" id="L124">			message = &quot; ScrollId : &quot; + scrollId;</span>
+		}
+<span class="fc bfc" id="L126" title="All 2 branches covered.">		if(!CommonUtils.isEmpty(search)) {</span>
+<span class="fc" id="L127">			message = &quot; Search on ID, NAME, BRAND, PRICE : &quot; + search;</span>
+		}
+<span class="fc" id="L129">		return message;</span>
+	}
+
+	/**
+	 * Validate the input for search.
+	 * @throws MyToysDefinedException 
+	 * 		throws the validation error for search input.
+	 */
+	private void validateSearchInput(String scrollId, String search, int size, String sort) throws MyToysDefinedException {
+<span class="fc bfc" id="L138" title="All 4 branches covered.">		if(!CommonUtils.isEmpty(scrollId) &amp;&amp; !CommonUtils.isEmpty(search)) {</span>
+<span class="fc" id="L139">			throw new MyToysDefinedException(&quot;Both the scrollId and search cannot be provided as input!, Only either of one can be provided for search - Please refer API documentation!&quot;);</span>
+		}
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">		if(!CommonUtils.isEmpty(sort)) {</span>
+<span class="fc" id="L142">			validateSortField(sort);</span>
+		}
+<span class="fc" id="L144">	}</span>
+
+	/**
+	 * Method to validate the sort field.
+	 */
+	private void validateSortField(String sort) throws MyToysDefinedException {
+<span class="fc" id="L150">		boolean isSortEligible = false;</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">		for(String header : ProductServiceConstant.HEADERS) {</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">			if(header.equals(sort)) {</span>
+<span class="fc" id="L153">				isSortEligible = true;</span>
+			}
+		}
+<span class="fc bfc" id="L156" title="All 2 branches covered.">		if(!isSortEligible) {</span>
+<span class="fc" id="L157">			throw new MyToysDefinedException(String.format(&quot;This is not an accepted sort field : '%s', \nOnly these fields are accepted for sorting : %s&quot;, sort, Arrays.toString(ProductServiceConstant.HEADERS)));</span>
+		}
+<span class="fc" id="L159">	}</span>
+
+	/**
+	 * This service is used to get all the products based on the following criteria
+	 * 		- Range - Say field price from 50 euros to 100 euros
+	 * 
+	 * @return all the products based on the above matching criteria.
+	 * @throws MyToysDefinedException 
+	 * 		- validation failure
+	 * 		- query failure
+	 */
+	public ProductResponse getProducts(RangeRequest rangeRequest) throws MyToysDefinedException {
+		try {
+<span class="fc" id="L172">			validateRangeRequest(rangeRequest);</span>
+<span class="fc" id="L173">			LOG.info(logMessage(rangeRequest));</span>
+<span class="fc" id="L174">			IProductDao productDao = new ProductDao();</span>
+<span class="fc" id="L175">			String scrollId = rangeRequest.getScrollId();</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">			if(!CommonUtils.isEmpty(scrollId)) {</span>
+<span class="fc" id="L177">				return productDao.getProducts(scrollId);</span>
+			} else {
+<span class="fc" id="L179">				return productDao.getProducts(rangeRequest);</span>
+			}
+<span class="fc" id="L181">		} catch (MyToysDefinedException e) {</span>
+<span class="fc" id="L182">			throw new MyToysDefinedException(e);</span>
+		}
+	}
+
+	/**
+	 * log message for range request.
+	 */
+	private Object logMessage(RangeRequest rangeRequest) {
+<span class="fc bfc" id="L190" title="All 2 branches covered.">		if(CommonUtils.isEmpty(rangeRequest.getScrollId())) {</span>
+<span class="fc" id="L191">			return String.format(&quot;Range Request - Field : %s, From : %s, To : %s&quot;, rangeRequest.getField(), rangeRequest.getStartvalue(), rangeRequest.getEndvalue());</span>
+		} else {
+<span class="fc" id="L193">			return &quot;Pagination search for the scrollId : &quot; + rangeRequest.getScrollId();</span>
+		}
+	}
+
+	/**
+	 * Method to validate the range request.
+	 */
+	private void 	validateRangeRequest(RangeRequest rangeRequest) throws MyToysDefinedException {
+<span class="fc" id="L201">		String field = rangeRequest.getField();</span>
+<span class="pc bpc" id="L202" title="1 of 6 branches missed.">		if(CommonUtils.isEmpty(rangeRequest.getScrollId()) &amp;&amp; !ProductServiceConstant.PRICE.equals(field) &amp;&amp; !ProductServiceConstant.OLD_PRICE.equals(field)) {</span>
+<span class="fc" id="L203">			throw new MyToysDefinedException(String.format(&quot;This is not an accepted field for range query : '%s', \nOnly these fields are accepted for range query : %s and %s&quot;, field, ProductServiceConstant.PRICE, ProductServiceConstant.OLD_PRICE));</span>
+		}
+<span class="fc" id="L205">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>ProductServiceIT (23 Aug, 2020 11:36:02 AM)</div></body></html>
