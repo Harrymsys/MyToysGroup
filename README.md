@@ -1,5 +1,19 @@
 # MyToysGroup
 ### This project contains the microservice for the product module in MyToysGroup
+
+# Technical Stack 
+
+#### Microservice - Spring Boot (Version - 2.3.3)
+#### DataStore - ElasticSearch (Version - 7.8.0)
+#### Junit - SpringBoot Mockmvc and Junit (Version - 5) 
+#### Jacaco - Test Coverage (Version - 0.8.5) 
+## We have 91.5 % test coverage for this project (check the code coverage section) 
+#### Docker-Compose - (Version - 2)
+#### UML Diagram - (ObjectAid) 
+#### Java - (Version - 8) 
+#### Single click deployment script (Bash) 
+
+
 # 1) Class Diagram for this project 
 ![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_design/class_diagram/MyToysGroup_ClassDiagram.png)
 
