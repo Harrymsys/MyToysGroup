@@ -133,19 +133,19 @@ http://192.168.56.101:8080/product?search=Tommy&sort=NAME&size=30
 
 **Response**: Json 
 
-	{
-  "data": [XXXX],
-  "total": 1200,
-  "totalRecordInCurrentSearch": 20,
-  "scrollId": "XXXX"
-}
+  {
+   "data": [XXXX],
+   "total": 1200,
+   "totalRecordInCurrentSearch": 20,
+   "scrollId": "XXXX" 
+   }
 
 **Possible Input **:
 
-	{
-	"field”: "PRICE",
-	"startvalue”: 10,
-	"endvalue”: 20
+{ 
+  "field": "PRICE",
+  "startvalue”: 10,
+   "endvalue”: 20
 }
 
 **Accepted Values in field**: PRICE and OLD_PRICE
