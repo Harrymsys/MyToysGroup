@@ -164,7 +164,7 @@ https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragerep
 
 docker-compose should be installed in the linux environment : https://docs.docker.com/compose/install/
 
-This project is completely dockerized and will run in a single click : 
+## This project is completely dockerized and will run in a single click : 
 
 **Step 1** : Clone this repository 
 
