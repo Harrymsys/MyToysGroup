@@ -140,7 +140,7 @@ http://192.168.56.101:8080/product?search=Tommy&sort=NAME&size=30
    "scrollId": "XXXX" 
    }
 
-**Possible Input **:
+**Possible Input**:
 
 { 
   "field": "PRICE",
