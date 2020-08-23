@@ -112,6 +112,8 @@ http://192.168.56.101:8080/product?search=Tommy&sort=NAME&size=30
 
 ###  3. API to GET / GLOBAL / EXTENSIVE SEARCH on the products of MyToysGroup using RANGE Query 
 
+## Case 7
+
 **API URL**: http://{BASE_URL}/product
 
 **API Method Type**: POST 
@@ -140,3 +142,8 @@ http://192.168.56.101:8080/product?search=Tommy&sort=NAME&size=30
 http://localhost:8080/product
 
 ![](https://github.com/Harrymsys/MyToysGroup/blob/master/mytoysgroup_testcoveragereport/supporting_images/pic9.PNG)
+
+## Case 8 :
+
+Pagination can also be done using the scrollId (as described in API 2 for Range Query too)
+
